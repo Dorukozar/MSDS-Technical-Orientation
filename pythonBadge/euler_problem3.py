@@ -1,30 +1,28 @@
 import math
 
-
-factor = 2
-
 def is_prime(n):
-    square_root = math.sqrt(n)
+    if n < 2:
+        return False
     if n == 2:
         return True
     if n % 2 == 0:
         return False
-    divisor = 3
-    while divisor <= square_root and n % divisor != 0:
-        divisor += 2
-    return divisor > square_root
-
-
-    
+    for divisor in range(3, int(math.sqrt(n)) + 1, 2):
+        if n % divisor == 0:
+            return False
+    return True
 
 num = 600851475143
-result = 2
-#while num > 1:
-for i in range(round(math.sqrt(num))):
-    if is_prime(i):
+result = 1
 
-        if num % i == 0:
-            result = i
-            
-                
+factor = 2
+
+while num > 1:
+    if num % factor == 0:
+        if is_prime(factor):
+            result = factor
+        while num % factor == 0:
+            num /= factor
+    factor += 1
+
 print(result)
